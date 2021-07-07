@@ -1,0 +1,5 @@
+.poster-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 3vw;
+}
