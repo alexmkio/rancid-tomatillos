@@ -4,7 +4,7 @@ import './Poster.css';
 const Poster = (props) => {
   return (
     <div>
-      <img src={props.photo}/>
+      <img className='poster-image' src={props.photo}/>
     </div>
   )
 }
