@@ -10,12 +10,12 @@ const Posters = ({movies}) => {
   })
 
   return (
-    <main>
+    <>
       <h2>Featured Films</h2>
       <section className='poster-container'>
         {posterCards}
       </section>
-    </main>
+    </>
   )
 }
 
