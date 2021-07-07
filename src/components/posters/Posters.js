@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Poster from '../poster/Poster';
 import './Posters.css';
 
-const Posters = () => {
-  const movies = [ 1, 2, 3 ]
+const Posters = ({movies}) => {
   const posterCards = movies.map(movie => {
     return (
       <Poster />
