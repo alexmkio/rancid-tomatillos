@@ -5,7 +5,7 @@ import './Posters.css';
 const Posters = ({movies}) => {
   const posterCards = movies.map(movie => {
     return (
-      <Poster />
+      <Poster key={movie.id} photo={movie['poster_path']}/>
     )
   })
 
