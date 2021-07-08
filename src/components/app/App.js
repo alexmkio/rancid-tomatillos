@@ -14,11 +14,15 @@ class App extends Component {
 
   render() {
     return(
+      <>
+      <header>
+        <h1>Rancid Tomatillos</h1>
+      </header>
       <main>
-        <h1>I am App</h1>
         <Posters movies={this.state.movies}/>
         <MovieDetails />
       </main>
+      </>
     )
   }
 }
