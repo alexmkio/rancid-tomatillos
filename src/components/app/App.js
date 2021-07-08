@@ -9,8 +9,24 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
+      error: "",
     }
   }
+
+  componentDidMount = async () => {
+    try {
+      let response = await fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies');
+      if(!response.ok) {
+        throw new Error(response.status);
+      }
+      let data = await response.json();
+      this.setState({movies: data.movies})
+      return;
+    }
+    catch (e) {
+      console.log('e', e.message);
+    }
+  };
 
   render() {
     return(
