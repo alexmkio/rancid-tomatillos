@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Posters from '../posters/Posters';
 import MovieDetails from '../movie_details/MovieDetails';
 import movieData from '../../movieData';
+import { getApiData } from '../../apiCalls';
 import './App.css';
 
 class App extends Component {
@@ -9,24 +10,18 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
-      error: "",
+      errorCode: null,
     }
   }
 
   componentDidMount = async () => {
     try {
-      let response = await fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies');
-      if(!response.ok) {
-        throw new Error(response.status);
-      }
-      let data = await response.json();
-      this.setState({movies: data.movies})
-      return;
+      const fetchedMovies = await getApiData('movies');
+      this.setState({movies: fetchedMovies.movies});
+    } catch (e) {
+      this.setState({errorCode: e.message})
     }
-    catch (e) {
-      console.log('e', e.message);
-    }
-  };
+  }
 
   render() {
     return(
