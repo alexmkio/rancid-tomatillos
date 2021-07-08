@@ -5,15 +5,17 @@ import './Posters.css';
 const Posters = ({movies}) => {
   const posterCards = movies.map(movie => {
     return (
-      <Poster />
+      <Poster key={movie.id} photo={movie['poster_path']}/>
     )
   })
 
   return (
-    <div>
-      <h2>I am Posters</h2>
-      {posterCards}
-    </div>
+    <>
+      <h2>Featured Films</h2>
+      <section className='poster-container'>
+        {posterCards}
+      </section>
+    </>
   )
 }
 

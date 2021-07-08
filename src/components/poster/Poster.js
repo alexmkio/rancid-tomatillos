@@ -1,10 +1,10 @@
 import React from 'react';
 import './Poster.css';
 
-const Poster = () => {
+const Poster = (props) => {
   return (
     <div>
-      <h3>I am a Poster</h3>
+      <img className='poster-image' src={props.photo}/>
     </div>
   )
 }
