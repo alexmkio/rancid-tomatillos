@@ -2,10 +2,16 @@ import React from 'react';
 import Poster from '../poster/Poster';
 import './Posters.css';
 
-const Posters = ({movies}) => {
+const Posters = ({movies, selectMovie}) => {
   const posterCards = movies.map(movie => {
     return (
-      <Poster key={movie.id} photo={movie['poster_path']}/>
+      <Poster
+        key={movie.id}
+        id={movie.id}
+        photo={movie['poster_path']}
+        title={movie.title}
+        selectMovie={selectMovie}
+      />
     )
   })
 
