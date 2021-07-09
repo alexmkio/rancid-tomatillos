@@ -25,9 +25,13 @@ class App extends Component {
   }
 
   selectMovie = async (event) => {
-    const match = await getApiData(`moviess/${event.target.id}`);
-    window.scrollTo(0,0);
-    this.setState({ selectedMovie: match.movie });
+    try {
+      const match = await getApiData(`movies/${event.target.id}`);
+      window.scrollTo(0,0);
+      this.setState({ selectedMovie: match.movie });
+    } catch (e) {
+      this.setState({errorCode: e.message})
+    }
   }
 
   clearSelected = () => {
