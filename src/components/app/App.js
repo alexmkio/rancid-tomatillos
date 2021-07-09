@@ -21,7 +21,20 @@ class App extends Component {
       this.setState({movies: fetchedMovies.movies});
     } catch (e) {
       this.setState({errorCode: e.message})
+      selectedMovie: null
     }
+  }
+
+  selectMovie = (event) => {
+    const match = this.state.movies.find(movie => movie.id === parseInt(event.target.id));
+    
+    window.scrollTo(0,0);
+
+    this.setState({ selectedMovie: match });
+  }
+
+  clearSelected = () => {
+    this.setState({ selectedMovie: null });
   }
 
   render() {
@@ -45,8 +58,9 @@ class App extends Component {
         <h1>Rancid Tomatillos</h1>
       </header>
       <main>
-        <Posters movies={this.state.movies}/>
-        <MovieDetails />
+        {!this.state.selectedMovie && <Posters movies={this.state.movies} selectMovie={this.selectMovie}/>}
+
+        {this.state.selectedMovie && <MovieDetails movie={this.state.selectedMovie} clearSelected={this.clearSelected}/>}
       </main>
       </>
     )
