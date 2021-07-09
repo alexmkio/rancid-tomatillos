@@ -15,9 +15,14 @@ class App extends Component {
 
   selectMovie = (event) => {
     const match = this.state.movies.find(movie => movie.id === parseInt(event.target.id));
-    console.log(match.title)
+    
+    window.scrollTo(0,0);
 
     this.setState({ selectedMovie: match });
+  }
+
+  clearSelected = () => {
+    this.setState({ selectedMovie: null });
   }
 
   render() {
@@ -29,7 +34,7 @@ class App extends Component {
       <main>
         {!this.state.selectedMovie && <Posters movies={this.state.movies} selectMovie={this.selectMovie}/>}
 
-        {this.state.selectedMovie && <MovieDetails movie={this.state.selectedMovie} />}
+        {this.state.selectedMovie && <MovieDetails movie={this.state.selectedMovie} clearSelected={this.clearSelected}/>}
       </main>
       </>
     )
