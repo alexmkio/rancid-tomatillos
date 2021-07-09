@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   selectMovie = async (event) => {
-    const match = await getApiData(`movies/${event.target.id}`);
+    const match = await getApiData(`moviess/${event.target.id}`);
     window.scrollTo(0,0);
     this.setState({ selectedMovie: match.movie });
   }
@@ -41,7 +41,8 @@ class App extends Component {
         <h1>Rancid Tomatillos</h1>
       </header>
       <main>
-        {this.state.errorCode && <ErrorCode code={this.state.errorCode}/>}
+        {this.state.errorCode && !this.state.selectedMovie && <ErrorCode code={this.state.errorCode}/>}
+        {this.state.errorCode && this.state.selectedMovie && <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>}
         {!this.state.errorCode && !this.state.movies.length && <Posters />}
         {this.state.movies.length && !this.state.selectedMovie && <Posters movies={this.state.movies} selectMovie={this.selectMovie}/>}
         {this.state.selectedMovie && <MovieDetails movie={this.state.selectedMovie} clearSelected={this.clearSelected}/>}
