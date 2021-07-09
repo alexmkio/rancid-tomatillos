@@ -1,4 +1,9 @@
 .poster-image {
   width: 15vw;
-  margin: 0vw 0.2vw;
+  margin: 0.1vw 0.2vw;
+  background-color: grey;
+}
+
+.placeholder-height {
+  height: 22.5vw;
 }
