@@ -35,27 +35,15 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.errorCode) {
-      return(
-        <ErrorCode code={this.state.errorCode}/>
-      )
-    }
-
-    if (!this.state.errorCode && !this.state.movies.length) {
-      return(
-        <>
-          <h1>Loading....</h1>
-        </>
-      ) 
-    }
-
     return(
       <>
       <header>
         <h1>Rancid Tomatillos</h1>
       </header>
       <main>
-        {!this.state.selectedMovie && <Posters movies={this.state.movies} selectMovie={this.selectMovie}/>}
+        {this.state.errorCode && <ErrorCode code={this.state.errorCode}/>}
+        {!this.state.errorCode && !this.state.movies.length && <Posters />}
+        {this.state.movies.length && !this.state.selectedMovie && <Posters movies={this.state.movies} selectMovie={this.selectMovie}/>}
         {this.state.selectedMovie && <MovieDetails movie={this.state.selectedMovie} clearSelected={this.clearSelected}/>}
       </main>
       </>
