@@ -3,7 +3,6 @@ import './ErrorCode.css';
 import httpResponses from '../../httpResponses';
 
 const ErrorCode = ({code, fetchingMovie, clearSelected}) => {
-  console.log(fetchingMovie)
   let response = httpResponses.find(response => response.code === parseInt(code))
   return (
     <article className='error-container'>
