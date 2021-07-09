@@ -24,10 +24,10 @@ class App extends Component {
     }
   }
 
-  selectMovie = (event) => {
-    const match = this.state.movies.find(movie => movie.id === parseInt(event.target.id));
+  selectMovie = async (event) => {
+    const match = await getApiData(`movies/${event.target.id}`);
     window.scrollTo(0,0);
-    this.setState({ selectedMovie: match });
+    this.setState({ selectedMovie: match.movie });
   }
 
   clearSelected = () => {
