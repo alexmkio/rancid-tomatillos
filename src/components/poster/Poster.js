@@ -16,8 +16,8 @@ const Poster = ({photo, id, title, selectMovie}) => {
     )
   }
   return (
-    <article className='poster-image placeholder-height'>
-    </article>
+    <div className='poster-image placeholder-height'>
+    </div>
   )
 }
 
