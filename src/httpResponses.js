@@ -1,10 +1,5 @@
 const httpResponses = [
   {
-    "code": 200,
-    "message": "OK",
-    "description": "The request has succeeded.",
-  },
-  {
     "code": 301,
     "message": "Moved Permanently",
     "description": "The URL of the requested resource has been changed permanently. The new URL is given in the response.",
