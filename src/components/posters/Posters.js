@@ -25,21 +25,11 @@ const Posters = ({movies, selectMovie}) => {
     })
   }
 
-  if (posterCards.length) {
-    return (
-      <>
-        <h2>Featured Films</h2>
-        <section className='poster-container'>
-          {posterCards}
-        </section>
-      </>
-    )
-  }
   return (
     <>
       <h2>Featured Films</h2>
       <section className='poster-container'>
-        {placeholderPosterCards}
+        {posterCards.length ? posterCards : placeholderPosterCards}
       </section>
     </>
   )
