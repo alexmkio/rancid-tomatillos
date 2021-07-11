@@ -2,6 +2,12 @@
   width: 15vw;
   margin: 0.1vw 0.2vw;
   background-color: grey;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.poster-image:hover {
+  transform: translateY(-2px);
 }
 
 .placeholder-height {
