@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ErrorCode.css';
 import httpResponses from '../../httpResponses';
 
@@ -17,3 +18,9 @@ const ErrorCode = ({code, fetchingMovie, clearSelected}) => {
 }
 
 export default ErrorCode;
+
+ErrorCode.propTypes = {
+  code: PropTypes.string.isRequired,
+  fetchingMovie: PropTypes.bool.isRequired,
+  clearSelected: PropTypes.func.isRequired
+};

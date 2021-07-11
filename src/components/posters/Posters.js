@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Poster from '../poster/Poster';
 import './Posters.css';
 
@@ -36,3 +37,8 @@ const Posters = ({movies, selectMovie}) => {
 }
 
 export default Posters;
+
+Posters.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object),
+  selectMovie: PropTypes.func
+};
