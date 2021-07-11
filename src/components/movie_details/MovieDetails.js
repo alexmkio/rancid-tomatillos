@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './MovieDetails.css';
 
 const MovieDetails = ({ movie, clearSelected }) => {
@@ -43,3 +44,21 @@ const MovieDetails = ({ movie, clearSelected }) => {
 }
 
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+  movie: PropTypes.exact({
+    average_rating: PropTypes.number,
+    backdrop_path: PropTypes.string,
+    budget: PropTypes.number,
+    genres: PropTypes.array,
+    id: PropTypes.number,
+    overview: PropTypes.string,
+    poster_path: PropTypes.string,
+    release_date: PropTypes.string,
+    revenue: PropTypes.number,
+    runtime: PropTypes.number,
+    tagline: PropTypes.string,
+    title: PropTypes.string,
+  }).isRequired, 
+  clearSelected: PropTypes.func.isRequired
+};
