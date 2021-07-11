@@ -32,6 +32,12 @@
   padding: 1em 2em;
   font-size: 1em;
   font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.details-back:hover {
+  color: #1abd9c;
 }
 
 dt {
@@ -55,4 +61,8 @@ dd {
   margin: 0.5em;
   padding: 0.5em 1.5em;
   line-height: 3em;
+}
+
+.tagline {
+  font-weight: 600;
 }
