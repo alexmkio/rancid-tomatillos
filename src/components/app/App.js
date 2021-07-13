@@ -17,6 +17,12 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
+    if (!this.state.movies.length) {
+      this.fetch()
+    }
+  }
+  
+  fetch = async () => {
     try {
       const fetchedMovies = await getApiData('movies');
       this.setState({movies: fetchedMovies.movies});
@@ -27,8 +33,14 @@ class App extends Component {
 
   selectMovie = async (id) => {
     try {
-      const fetchedMovies = await getApiData('movies');
-      const movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
+      let movieIDs
+      if (this.state.movies.length) {
+        movieIDs = this.state.movies.map(movie => movie.id.toString())
+      } else {
+        const fetchedMovies = await getApiData('movies');
+        movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
+      }
+
       if (movieIDs.includes(id)) {
         const match = await getApiData(`movies/${id}`);
         this.setState({selectedMovie: match.movie});
@@ -39,6 +51,21 @@ class App extends Component {
       this.setState({errorCode: e.message});
     }
   }
+
+  // selectMovie = async (id) => {
+  //   try {
+  //     const fetchedMovies = await getApiData('movies');
+  //     const movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
+  //     if (movieIDs.includes(id)) {
+  //       const match = await getApiData(`movies/${id}`);
+  //       this.setState({selectedMovie: match.movie});
+  //     } else {
+  //       throw new Error('404');
+  //     }
+  //   } catch (e) {
+  //     this.setState({errorCode: e.message});
+  //   }
+  // }
 
   clearSelected = () => {
     this.setState({
