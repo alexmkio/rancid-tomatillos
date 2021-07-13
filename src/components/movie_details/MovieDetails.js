@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MovieDetails.css';
 
 class MovieDetails extends Component {
   componentDidMount() {
-    console.log('PROPS', this.props)
+    console.log('componentDidMount Props', this.props)
     this.props.selectMovie(this.props.id);
  }
 
@@ -47,17 +48,13 @@ class MovieDetails extends Component {
               {budget}
               {revenue}
             </dl>
-            <button className='details-back' onClick={this.props.clearSelected}>Back</button>
+            <Link to={'/'} >
+              <button className='details-back' onClick={this.props.clearSelected}>Back</button>
+            </Link>
           </div>
         </section>
       )
     }
-
-    return (
-      <div></div>
-    )
-
-    
   }
 }
 
