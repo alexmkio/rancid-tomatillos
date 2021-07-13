@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './MovieDetails.css';
 
 class MovieDetails extends Component {
   componentDidMount() {
-    console.log('componentDidMount Props', this.props);
     this.props.selectMovie(this.props.id);
   }
 
   render() {
     if (!this.props.movie.id) {
-      console.log('No Movie')
       return (
-        <h3>Loading inside Movie Details</h3>        
+        <h3>Loading Movie Details</h3>        
       )
     } else {
-      console.log('Found 1 movie sir')
       let movie = this.props.movie;
       let genres = movie.genres.map(genre => <dd key={movie.genres.indexOf(genre)} className='genre'>{genre}</dd>);
       let tagline = !movie.tagline ? null : <dd className='tagline'>"{movie.tagline}"</dd>;
@@ -63,20 +60,6 @@ class MovieDetails extends Component {
 
 export default MovieDetails;
 
-// MovieDetails.propTypes = {
-//   movie: PropTypes.exact({
-//     average_rating: PropTypes.number,
-//     backdrop_path: PropTypes.string,
-//     budget: PropTypes.number,
-//     genres: PropTypes.array,
-//     id: PropTypes.number,
-//     overview: PropTypes.string,
-//     poster_path: PropTypes.string,
-//     release_date: PropTypes.string,
-//     revenue: PropTypes.number,
-//     runtime: PropTypes.number,
-//     tagline: PropTypes.string,
-//     title: PropTypes.string,
-//   }).isRequired, 
-//   clearSelected: PropTypes.func.isRequired
-// };
+MovieDetails.propTypes = {
+  clearSelected: PropTypes.func.isRequired
+};

@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Poster from '../poster/Poster';
 import './Posters.css';
-import { Link } from 'react-router-dom';
 
 const Posters = ({movies}) => {
   let placeholderIDs = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
@@ -41,6 +41,5 @@ const Posters = ({movies}) => {
 export default Posters;
 
 Posters.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object),
-  selectMovie: PropTypes.func
+  movies: PropTypes.arrayOf(PropTypes.object)
 };

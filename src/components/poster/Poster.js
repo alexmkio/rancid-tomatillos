@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Poster.css';
 
-const Poster = ({photo, id, title }) => {
+const Poster = ({photo, id, title}) => {
   if (photo) {
     return (
       <article>
@@ -26,6 +26,5 @@ export default Poster;
 Poster.propTypes = {
   photo: PropTypes.string,
   id: PropTypes.number,
-  title: PropTypes.string,
-  selectMovie: PropTypes.func
+  title: PropTypes.string
 };

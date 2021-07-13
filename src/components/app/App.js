@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-    console.log('App componentDidMount')
     try {
       const fetchedMovies = await getApiData('movies');
       this.setState({movies: fetchedMovies.movies});
@@ -60,7 +59,6 @@ class App extends Component {
             }}
           />
           <Route exact path='/:id' render={({match}) => {
-            console.log('App :id Route', this.state.movies)
             if (this.state.errorCode) {
               return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
             } else if (!this.state.selectedMovie) {

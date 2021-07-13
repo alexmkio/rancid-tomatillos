@@ -24,6 +24,5 @@ export default ErrorCode;
 
 ErrorCode.propTypes = {
   code: PropTypes.string.isRequired,
-  fetchingMovie: PropTypes.bool,
   clearSelected: PropTypes.func
 };
