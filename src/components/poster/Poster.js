@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Poster.css';
 
-const Poster = ({photo, id, title, selectMovie}) => {
+const Poster = ({photo, id, title }) => {
   if (photo) {
     return (
       <article>
@@ -11,7 +11,6 @@ const Poster = ({photo, id, title, selectMovie}) => {
           id={id}
           src={photo}
           alt={title}
-          onClick={selectMovie}
         />
       </article>
     )
