@@ -4,7 +4,7 @@ import Poster from '../poster/Poster';
 import './Posters.css';
 import { Link } from 'react-router-dom';
 
-const Posters = ({movies, selectMovie}) => {
+const Posters = ({movies}) => {
   let placeholderIDs = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
   const placeholderPosterCards = placeholderIDs.map(number => {
     return (

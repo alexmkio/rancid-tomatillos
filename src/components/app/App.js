@@ -13,11 +13,12 @@ class App extends Component {
       movies: [],
       errorCode: null,
       fetchingMovie: null,
-      selectedMovie: {}
+      selectedMovie: { id: '' }
     }
   }
 
   componentDidMount = async () => {
+    console.log('App componentDidMount')
     try {
       const fetchedMovies = await getApiData('movies');
       this.setState({movies: fetchedMovies.movies});
@@ -35,35 +36,12 @@ class App extends Component {
     }
   }
 
-  // selectMovie = async (id) => {
-  //   //if a MovieDetails sends an id run
-  //   //probs: not being able to read this.state.selectedMovie of null
-  //   //infinite loop if fetching movie that's already selected
-
-  //   //if movie is already selected we should return this.state.selectedMovie right?!
-  //   if (!this.state.selectedMovie) {
-  //     // this.setState({selectedMovie: {id: 'whatever'}});
-    
-  //   if (this.state.selectedMovie.id === parseInt(id)) {
-  //     console.log('BAD')
-  //     return this.state.selectedMovie
-  //   }
-  //   if (this.state.selectedMovie.id !== parseInt(id)) {
-  //     try {
-  //       console.log('GOOD')
-  //       this.setState({fetchingMovie: true});
-  //       const match = await getApiData(`movies/${id}`);
-  //       window.scrollTo(0,0);
-  //       this.setState({selectedMovie: match.movie});
-  //     } 
-  //     catch (e) {
-  //       this.setState({errorCode: e.message})
-  //     }
-  //   }
-  // }
-
   clearSelected = () => {
-    this.setState({errorCode: null, selectedMovie: null, fetchingMovie: null});
+    this.setState({
+      errorCode: null, 
+      fetchingMovie: null, 
+      selectedMovie: { id: '' }, 
+    });
   }
 
   render() {
@@ -74,28 +52,28 @@ class App extends Component {
       </header>
       <main>
         <Route exact path='/' render={() => {
-              if (this.state.error) {
-                return <ErrorCode error={this.state.error} />
+              if (this.state.errorCode) {
+                return <ErrorCode code={this.state.errorCode} />
               } else if (!this.state.movies.length) {
                 return <Posters />
               } else {
-                return <Posters movies={this.state.movies} selectMovie={this.selectMovie}/>
+                return <Posters movies={this.state.movies} />
               }
             }}
           />
           <Route exact path='/:id' render={({match}) => {
-            const id = parseInt(match.params.id);
-            if (this.state.error) {
-              return <ErrorCode error={this.state.error} />
+            console.log('App :id route', this.state.movies)
+            if (this.state.errorCode) {
+              return <ErrorCode code={this.state.errorCode} />
             } else if (!this.state.selectedMovie) {
               return <MovieDetails />
             } else {
               return <MovieDetails 
                 key={this.state.selectedMovie.id} 
-                id={id} 
+                id={parseInt(match.params.id)} 
                 movie={this.state.selectedMovie} 
-                selectMovie={this.selectMovie} 
                 clearSelected={this.clearSelected}
+                selectMovie={this.selectMovie} 
               />
             }
           }}/>
@@ -103,33 +81,7 @@ class App extends Component {
       </>
     )
   }
-
-  // render() {
-  //   return(
-  //     <>
-  //     <header>
-  //       <h1>Rancid Tomatillos</h1>
-  //     </header>
-  //     <main>
-  //       <Switch>
-  //         <Route exact path='/'>
-  //           <Posters movies={this.state.movies}/>
-  //         </Route>
-  //         <Route exact path="/:id" render={({ match }) => {
-  //           if (this.state.movies.some(movie => parseInt(movie.id) === parseInt(match.params.id))) {
-  //             return <MovieDetails match={match} selectMovie={this.selectMovie} />
-  //           }
-  //           return <ErrorCode code="404" />
-  //         }}/>
-  //       </Switch>
-  //     </main>
-  //     </>
-  //   )
-  // }
 }
-// <Route>
-//   <MovieDetails movie={this.state.selectedMovie} clearSelected={this.clearSelected}/>
-// </Route>
 
 // {this.state.errorCode && !this.state.fetchingMovie && <ErrorCode code={this.state.errorCode}/>}
 // {this.state.errorCode && this.state.fetchingMovie && <ErrorCode code={this.state.errorCode} fetchingMovie={this.state.fetchingMovie} clearSelected={this.clearSelected}/>}
