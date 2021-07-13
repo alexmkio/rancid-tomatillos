@@ -16,7 +16,7 @@ const Posters = ({movies}) => {
   if (movies) {
     posterCards = movies.map(movie => {
       return (
-        <Link to={`${movie.id}`}>
+        <Link to={`${movie.id}`} key={movie.id}>
           <Poster
             key={movie.id}
             id={movie.id}
