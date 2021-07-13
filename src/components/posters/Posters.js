@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Poster from '../poster/Poster';
 import './Posters.css';
 
-const Posters = ({movies, selectMovie}) => {
+const Posters = ({movies}) => {
   let placeholderIDs = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
   const placeholderPosterCards = placeholderIDs.map(number => {
     return (
@@ -15,13 +16,14 @@ const Posters = ({movies, selectMovie}) => {
   if (movies) {
     posterCards = movies.map(movie => {
       return (
-        <Poster
-          key={movie.id}
-          id={movie.id}
-          photo={movie['poster_path']}
-          title={movie.title}
-          selectMovie={selectMovie}
-        />
+        <Link to={`${movie.id}`} key={movie.id}>
+          <Poster
+            key={movie.id}
+            id={movie.id}
+            photo={movie.poster_path}
+            title={movie.title}
+          />
+        </Link>
       )
     })
   }
@@ -39,6 +41,5 @@ const Posters = ({movies, selectMovie}) => {
 export default Posters;
 
 Posters.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object),
-  selectMovie: PropTypes.func
+  movies: PropTypes.arrayOf(PropTypes.object)
 };
