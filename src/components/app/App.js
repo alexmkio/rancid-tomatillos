@@ -12,7 +12,6 @@ class App extends Component {
     this.state = {
       movies: [],
       errorCode: null,
-      fetchingMovie: null,
       selectedMovie: { id: '' }
     }
   }
@@ -38,8 +37,7 @@ class App extends Component {
 
   clearSelected = () => {
     this.setState({
-      errorCode: null, 
-      fetchingMovie: null, 
+      errorCode: null,  
       selectedMovie: { id: '' }, 
     });
   }
@@ -55,9 +53,9 @@ class App extends Component {
               if (this.state.errorCode) {
                 return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
               } else if (!this.state.movies.length) {
-                return <Posters />
+                return <Posters/>
               } else {
-                return <Posters movies={this.state.movies} />
+                return <Posters movies={this.state.movies}/>
               }
             }}
           />
@@ -83,9 +81,4 @@ class App extends Component {
   }
 }
 
-// {this.state.errorCode && !this.state.fetchingMovie && <ErrorCode code={this.state.errorCode}/>}
-// {this.state.errorCode && this.state.fetchingMovie && <ErrorCode code={this.state.errorCode} fetchingMovie={this.state.fetchingMovie} clearSelected={this.clearSelected}/>}
-// {!this.state.errorCode && !this.state.movies.length && <Posters />}
-// {this.state.movies.length && !this.state.selectedMovie && <Posters movies={this.state.movies} selectMovie={this.selectMovie}/>}
-// {this.state.selectedMovie && <MovieDetails movie={this.state.selectedMovie} clearSelected={this.clearSelected}/>}
 export default App;
