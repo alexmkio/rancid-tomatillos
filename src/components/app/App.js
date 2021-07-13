@@ -38,9 +38,9 @@ class App extends Component {
         movieIDs = this.state.movies.map(movie => movie.id.toString())
       } else {
         const fetchedMovies = await getApiData('movies');
+        this.setState({movies: fetchedMovies.movies});
         movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
       }
-
       if (movieIDs.includes(id)) {
         const match = await getApiData(`movies/${id}`);
         this.setState({selectedMovie: match.movie});
@@ -51,21 +51,6 @@ class App extends Component {
       this.setState({errorCode: e.message});
     }
   }
-
-  // selectMovie = async (id) => {
-  //   try {
-  //     const fetchedMovies = await getApiData('movies');
-  //     const movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
-  //     if (movieIDs.includes(id)) {
-  //       const match = await getApiData(`movies/${id}`);
-  //       this.setState({selectedMovie: match.movie});
-  //     } else {
-  //       throw new Error('404');
-  //     }
-  //   } catch (e) {
-  //     this.setState({errorCode: e.message});
-  //   }
-  // }
 
   clearSelected = () => {
     this.setState({
