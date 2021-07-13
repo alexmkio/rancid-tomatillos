@@ -12,7 +12,7 @@ const ErrorCode = ({code, clearSelected}) => {
         <h2 className='error-h2'>Error {response.code}</h2>
         <h3>{response.message}</h3>
         <p>{response.description}</p>
-        <Link to={'/'}>
+        <Link to='/'>
           <button className='details-back' onClick={clearSelected}>Back</button>
         </Link>
       </div>

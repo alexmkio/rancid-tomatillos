@@ -20,7 +20,7 @@ const Posters = ({movies}) => {
           <Poster
             key={movie.id}
             id={movie.id}
-            photo={movie['poster_path']}
+            photo={movie.poster_path}
             title={movie.title}
           />
         </Link>
