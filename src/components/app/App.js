@@ -27,8 +27,14 @@ class App extends Component {
 
   selectMovie = async (id) => {
     try {
-      const match = await getApiData(`movies/${id}`);
-      this.setState({selectedMovie: match.movie});
+      const fetchedMovies = await getApiData('movies');
+      const movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
+      if (movieIDs.includes(id)) {
+        const match = await getApiData(`movies/${id}`);
+        this.setState({selectedMovie: match.movie});
+      } else {
+        throw new Error('404');
+      }
     } catch (e) {
       this.setState({errorCode: e.message});
     }
@@ -49,30 +55,29 @@ class App extends Component {
       </header>
       <main>
         <Route exact path='/' render={() => {
-              if (this.state.errorCode) {
-                return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-              } else if (!this.state.movies.length) {
-                return <Posters/>
-              } else {
-                return <Posters movies={this.state.movies}/>
-              }
-            }}
-          />
-          <Route exact path='/:id' render={({match}) => {
-            if (this.state.errorCode) {
-              return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-            } else if (!this.state.selectedMovie) {
-              return <MovieDetails />
-            } else {
-              return <MovieDetails 
-                key={this.state.selectedMovie.id} 
-                id={parseInt(match.params.id)} 
-                movie={this.state.selectedMovie} 
-                clearSelected={this.clearSelected}
-                selectMovie={this.selectMovie} 
-              />
-            }
-          }}/>
+          if (this.state.errorCode) {
+            return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
+          } else if (!this.state.movies.length) {
+            return <Posters/>
+          } else {
+            return <Posters movies={this.state.movies}/>
+          }
+        }}/>
+        <Route exact path='/:id' render={({match}) => {
+          if (this.state.errorCode) {
+            return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
+          } else if (!this.state.selectedMovie) {
+            return <MovieDetails />
+          } else {
+            return <MovieDetails 
+              key={this.state.selectedMovie.id} 
+              id={match.params.id} 
+              movie={this.state.selectedMovie} 
+              clearSelected={this.clearSelected}
+              selectMovie={this.selectMovie} 
+            />
+          }
+        }}/>
       </main>
       </>
     )
