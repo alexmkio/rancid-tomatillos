@@ -4,7 +4,7 @@ import MovieDetails from '../movie_details/MovieDetails';
 import ErrorCode from '../error_code/ErrorCode';
 import { getApiData } from '../../apiCalls';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
@@ -53,7 +53,7 @@ class App extends Component {
       <main>
         <Route exact path='/' render={() => {
               if (this.state.errorCode) {
-                return <ErrorCode code={this.state.errorCode} />
+                return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
               } else if (!this.state.movies.length) {
                 return <Posters />
               } else {
@@ -62,9 +62,9 @@ class App extends Component {
             }}
           />
           <Route exact path='/:id' render={({match}) => {
-            console.log('App :id route', this.state.movies)
+            console.log('App :id Route', this.state.movies)
             if (this.state.errorCode) {
-              return <ErrorCode code={this.state.errorCode} />
+              return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
             } else if (!this.state.selectedMovie) {
               return <MovieDetails />
             } else {

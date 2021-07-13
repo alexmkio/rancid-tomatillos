@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './MovieDetails.css';
 
 class MovieDetails extends Component {
   componentDidMount() {
-    console.log('componentDidMount Props', this.props)
+    console.log('componentDidMount Props', this.props);
     this.props.selectMovie(this.props.id);
- }
+  }
 
   render() {
     if (!this.props.movie.id) {
       console.log('No Movie')
+      return (
+        <h3>Loading inside Movie Details</h3>        
+      )
     } else {
       console.log('Found 1 movie sir')
       let movie = this.props.movie;
