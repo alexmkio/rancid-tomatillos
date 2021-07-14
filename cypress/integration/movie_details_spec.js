@@ -39,4 +39,11 @@ describe('Movie Details user flows', () => {
       .get('dd[class="genre"]').contains('Action')
       .get('dl').should('not.contain', 'Revenue')
   });
+
+  it('Should return to the main page when the Back button is clicked', () => {
+    cy.get('img[id="694919"]').click()
+      .get('button').click()
+      .url().should('not.contain', '/694919')
+      .get('h2').contains('Featured Films')
+  });
 })
