@@ -18,14 +18,14 @@ class App extends Component {
 
   componentDidMount = async () => {
     if (!this.state.movies.length) {
-      this.fetch()
+      this.fetch('movies')
+        .then(data => this.setState({movies: data.movies}));
     }
   }
   
-  fetch = async () => {
+  fetch = async (endPoint) => {
     try {
-      const fetchedMovies = await getApiData('movies');
-      this.setState({movies: fetchedMovies.movies});
+      return await getApiData(endPoint);
     } catch (e) {
       this.setState({errorCode: e.message});
     }
@@ -37,13 +37,19 @@ class App extends Component {
       if (this.state.movies.length) {
         movieIDs = this.state.movies.map(movie => movie.id.toString())
       } else {
+        // const movies = await this.fetch('movies');
+        // this.setState({movies: movies.movies})
+
+        // this.fetch('movies')
+        //   .then(data => this.setState({movies: data.movies}));
+
         const fetchedMovies = await getApiData('movies');
         this.setState({movies: fetchedMovies.movies});
         movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
       }
       if (movieIDs.includes(id)) {
-        const match = await getApiData(`movies/${id}`);
-        this.setState({selectedMovie: match.movie});
+        this.fetch(`movies/${id}`)
+          .then(data => this.setState({selectedMovie: data.movie}));
       } else {
         throw new Error('404');
       }
