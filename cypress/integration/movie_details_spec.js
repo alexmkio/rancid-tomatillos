@@ -31,4 +31,12 @@ describe('Movie Details user flows', () => {
     cy.get('img[id="694919"').click()
       .url().should('include', '/694919')
   });
+
+  it('Should display the correct movie details on the details page', () => {
+
+    cy.get('img[id="694919"').click()
+      .get('h2').contains('Money Plane')
+      .get('dd[class="genre"]').contains('Action')
+      .get('dl').should('not.contain', 'Revenue')
+  });
 })
