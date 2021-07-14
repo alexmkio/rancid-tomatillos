@@ -59,4 +59,10 @@ describe('Movie Details user flows', () => {
     cy.visit('http://localhost:3000/showmemovies')
       .get('h2').contains('Error 404')
   });
+
+  it('Should show a movie details page when its unique URL is visited', () => {
+    cy.visit('http://localhost:3000/694919')
+      .get('h2').contains('Money Plane')
+      .get('dl').should('not.contain', 'Budget')
+  });
 })
