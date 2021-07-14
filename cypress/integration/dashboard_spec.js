@@ -40,4 +40,13 @@ describe('Dashboard user flows', () => {
       .get('img[id="694919"]').should('be.visible')
       .get('img[id="337401"]').should('be.visible')
   });
+
+  it('Should show an error message if there is a problem with the server', () => {
+
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', { statusCode: 500 })
+
+    cy.visit('http://localhost:3000')
+      .get('h1').contains('Rancid Tomatillos')
+      .get('h3').contains('Internal Server Error')
+  });
 });
