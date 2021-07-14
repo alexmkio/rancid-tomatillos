@@ -49,9 +49,14 @@ describe('Movie Details user flows', () => {
 
   it('Should be able to navigate using the browser forward/back buttons', () => {
     cy.get('img[id="694919"]').click()
-      .go('back')
+      .go(-1)
       .url().should('not.include', '/694919')
-      .go('forward')
+      .go(1)
       .url().should('include', '/694919')
+  });
+
+  it('Should show a 404 Error if an invalid URL is entered', () => {
+    cy.visit('http://localhost:3000/showmemovies')
+      .get('h2').contains('Error 404')
   });
 })
