@@ -43,7 +43,15 @@ describe('Movie Details user flows', () => {
   it('Should return to the main page when the Back button is clicked', () => {
     cy.get('img[id="694919"]').click()
       .get('button').click()
-      .url().should('not.contain', '/694919')
+      .url().should('not.include', '/694919')
       .get('h2').contains('Featured Films')
+  });
+
+  it('Should be able to navigate using the browser forward/back buttons', () => {
+    cy.get('img[id="694919"]').click()
+      .go('back')
+      .url().should('not.include', '/694919')
+      .go('forward')
+      .url().should('include', '/694919')
   });
 })
