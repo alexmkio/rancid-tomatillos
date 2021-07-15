@@ -87,6 +87,14 @@ describe('Movie Details user flows', () => {
       .get('h2').contains('Error 404')
   });
 
+  it('Clicking the back button on the 404 page should return the user to the dashboard', () => {
+    cy.visit('http://localhost:3000/showmemovies')
+      .get('button').click()
+      .url().should('not.include', '/showmemovies')
+      .get('h2').contains('Featured Films')
+      .get('img[id="694919"]').should('be.visible')
+  });
+
   it('Should show a movie details page when its unique URL is visited', () => {
     cy.visit('http://localhost:3000/694919')
       .get('h2').contains('Money Plane')
