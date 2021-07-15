@@ -34,7 +34,7 @@ class App extends Component {
     }
   }
 
-  clearSelected = (id) => {
+  clearSelected = () => {
     this.setState({
       errorCode: null,
       selectedMovie: null 
