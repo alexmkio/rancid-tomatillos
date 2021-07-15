@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './MovieDetails.css';
 
 class MovieDetails extends Component {
   componentDidMount() {
-    this.props.selectMovie(this.props.id);
+    this.props.fetch(`movies/${this.props.id}`)
   }
 
   render() {
-    if (!this.props.movie.id) {
+    if (!this.props.state) {
       return (
         <h3>Loading Movie Details</h3>        
       )
@@ -59,7 +58,3 @@ class MovieDetails extends Component {
 }
 
 export default MovieDetails;
-
-MovieDetails.propTypes = {
-  clearSelected: PropTypes.func.isRequired
-};
