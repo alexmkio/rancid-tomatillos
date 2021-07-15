@@ -9,7 +9,7 @@ class MovieDetails extends Component {
   }
 
   render() {
-    if (!this.props.movie.id) {
+    if (!this.props.state) {
       return (
         <h3>Loading Movie Details</h3>        
       )
