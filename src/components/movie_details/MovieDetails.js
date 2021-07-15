@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './MovieDetails.css';
 
 class MovieDetails extends Component {
@@ -59,7 +58,3 @@ class MovieDetails extends Component {
 }
 
 export default MovieDetails;
-
-MovieDetails.propTypes = {
-  clearSelected: PropTypes.func.isRequired
-};
