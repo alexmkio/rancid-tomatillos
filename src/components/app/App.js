@@ -12,56 +12,32 @@ class App extends Component {
     this.state = {
       movies: [],
       errorCode: null,
-      selectedMovie: { id: '' }
+      selectedMovie: null
     }
   }
 
   componentDidMount = async () => {
-    if (!this.state.movies.length) {
-      this.fetch('movies')
-        .then(data => this.setState({movies: data.movies}));
-    }
+    this.fetch('movies')
   }
   
   fetch = async (endPoint) => {
     try {
-      return await getApiData(endPoint);
-    } catch (e) {
-      this.setState({errorCode: e.message});
-    }
-  }
-
-  selectMovie = async (id) => {
-    try {
-      let movieIDs
-      if (this.state.movies.length) {
-        movieIDs = this.state.movies.map(movie => movie.id.toString())
+      if (endPoint.includes('/')) {
+        let fetchedMovie = await getApiData(endPoint)
+        this.setState({selectedMovie: fetchedMovie.movie})
       } else {
-        // const movies = await this.fetch('movies');
-        // this.setState({movies: movies.movies})
-
-        // this.fetch('movies')
-        //   .then(data => this.setState({movies: data.movies}));
-
-        const fetchedMovies = await getApiData('movies');
-        this.setState({movies: fetchedMovies.movies});
-        movieIDs = fetchedMovies.movies.map(movie => movie.id.toString())
-      }
-      if (movieIDs.includes(id)) {
-        this.fetch(`movies/${id}`)
-          .then(data => this.setState({selectedMovie: data.movie}));
-      } else {
-        throw new Error('404');
+        let fetchedMovies = await getApiData(endPoint)
+        this.setState({movies: fetchedMovies.movies})
       }
     } catch (e) {
       this.setState({errorCode: e.message});
     }
   }
 
-  clearSelected = () => {
+  clearSelected = (id) => {
     this.setState({
-      errorCode: null,  
-      selectedMovie: { id: '' }, 
+      errorCode: null,
+      selectedMovie: null 
     });
   }
 
@@ -85,14 +61,18 @@ class App extends Component {
           if (this.state.errorCode) {
             return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
           } else if (!this.state.selectedMovie) {
-            return <MovieDetails />
+            return <MovieDetails 
+              id={match.params.id} 
+              fetch={this.fetch} 
+            />
           } else {
             return <MovieDetails 
               key={this.state.selectedMovie.id} 
               id={match.params.id} 
               movie={this.state.selectedMovie} 
               clearSelected={this.clearSelected}
-              selectMovie={this.selectMovie} 
+              fetch={this.fetch} 
+              state={this.state}
             />
           }
         }}/>
