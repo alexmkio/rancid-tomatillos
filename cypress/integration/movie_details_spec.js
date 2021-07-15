@@ -92,4 +92,10 @@ describe('Movie Details user flows', () => {
       .get('h2').contains('Money Plane')
       .get('dl').should('not.contain', 'Budget')
   });
+
+  it('Should show a 500 error message on movie details page if server is down', () => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', { statusCode: 500 })
+    cy.visit('http://localhost:3000/694919')
+      .contains('Error 500')
+  });
 });
