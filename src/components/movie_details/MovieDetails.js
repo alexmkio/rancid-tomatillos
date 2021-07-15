@@ -5,7 +5,7 @@ import './MovieDetails.css';
 
 class MovieDetails extends Component {
   componentDidMount() {
-    this.props.selectMovie(this.props.id);
+    this.props.fetch(`movies/${this.props.id}`)
   }
 
   render() {
