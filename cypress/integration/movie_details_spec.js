@@ -106,4 +106,39 @@ describe('Movie Details user flows', () => {
     cy.visit('http://localhost:3000/694919')
       .contains('Error 500')
   });
+
+  it('Should show a loading message while data is being fetched', () => {
+    let sendResponse;
+    const trigger = new Promise((resolve) => {
+      sendResponse = resolve;
+    });
+
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', (request) => {
+      return trigger.then(() => {
+        request.reply({
+          movie: {
+            id: 694919,
+            title: 'Money Plane',
+            poster_path: 'https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg',
+            backdrop_path: 'https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg',
+            release_date: '2020-09-29',
+            overview: "A professional thief with $40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
+            genres: ["Action"],
+            budget: 0,
+            revenue: 0,
+            runtime: 82,
+            tagline: '',
+            average_rating: 6.142857142857143
+          }
+        });
+      });
+    });
+
+    cy.visit('http://localhost:3000/694919')
+      .get('h3').should('contain', 'Loading Movie Details').then(() => {
+        sendResponse();
+        cy.get('h3').should('not.exist')
+        cy.get('h2').contains('Money Plane')
+      });
+  });
 });
