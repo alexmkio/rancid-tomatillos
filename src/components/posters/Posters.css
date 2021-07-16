@@ -7,3 +7,9 @@
 h2 {
   margin: 1em;
 }
+
+@media screen and (max-width: 500px) {
+  h2 {
+    font-size: 1em;
+  }
+}
