@@ -20,3 +20,10 @@
     margin: 1.2vw;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .poster-image {
+    width: 30vw;
+    margin: 0.8vw;
+  }
+}
