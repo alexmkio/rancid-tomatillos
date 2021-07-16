@@ -7,3 +7,10 @@ header {
 main {
   color: #ffffff;
 }
+
+@media screen and (max-width: 500px) {
+  header {
+    font-size: 1em;
+    padding: 1.5em;
+  }
+}
