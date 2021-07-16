@@ -20,13 +20,13 @@ class MovieDetails extends Component {
       let budget = !movie.budget ? null : (
         <>
           <dt>Budget</dt>
-          <dd>${movie.budget}</dd>
+          <dd>${movie.budget.toLocaleString('en-US')}</dd>
         </>
       );
       let revenue = !movie.revenue ? null : (
         <>
           <dt>Revenue</dt>
-          <dd>${movie.revenue}</dd>
+          <dd>${movie.revenue.toLocaleString('en-US')}</dd>
         </>
       );
       return (
