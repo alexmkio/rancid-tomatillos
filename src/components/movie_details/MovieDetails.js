@@ -44,7 +44,7 @@ class MovieDetails extends Component {
               <dt>Release Date</dt>
               <dd>{movie.release_date}</dd>
               <dt>Average User Rating</dt>
-              <dd>{movie.average_rating.toFixed(2)}</dd>
+              <dd>{Math.round(movie.average_rating * 100) / 100}</dd>
               {budget}
               {revenue}
             </dl>
