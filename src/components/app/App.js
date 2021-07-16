@@ -67,7 +67,6 @@ class App extends Component {
             />
           } else {
             return <MovieDetails 
-              key={this.state.selectedMovie.id} 
               id={match.params.id} 
               movie={this.state.selectedMovie} 
               clearSelected={this.clearSelected}
