@@ -38,11 +38,11 @@ class App extends Component {
     if (urlEndPoint.includes('/')) {
       return {average_rating: Math.round(data.movie.average_rating * 100) / 100,
               backdrop_path: data.movie.backdrop_path,
-              budget: data.movie.budget,
+              budget: data.movie.budget.toLocaleString('en-US'),
               genres: data.movie.genres,
               overview: data.movie.overview,
               release_date: data.movie.release_date,
-              revenue: data.movie.revenue,
+              revenue: data.movie.revenue.toLocaleString('en-US'),
               runtime: data.movie.runtime,
               tagline: data.movie.tagline,
               title: data.movie.title}
