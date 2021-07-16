@@ -83,14 +83,14 @@ describe('Movie Details user flows', () => {
   });
 
   it('Should show a 404 Error if an invalid URL is entered', () => {
-    cy.visit('http://localhost:3000/showmemovies')
+    cy.visit('http://localhost:3000/123456')
       .get('h2').contains('Error 404')
   });
 
   it('Clicking the back button on the 404 page should return the user to the dashboard', () => {
-    cy.visit('http://localhost:3000/showmemovies')
+    cy.visit('http://localhost:3000/123456')
       .get('button').click()
-      .url().should('not.include', '/showmemovies')
+      .url().should('not.include', '/123456')
       .get('h2').contains('Featured Films')
       .get('img[id="694919"]').should('be.visible')
   });
