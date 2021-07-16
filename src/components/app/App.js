@@ -27,10 +27,22 @@ class App extends Component {
         this.setState({selectedMovie: fetchedMovie.movie})
       } else {
         let fetchedMovies = await getApiData(endPoint)
-        this.setState({movies: fetchedMovies.movies})
+        this.setState({movies: this.cleanData(endPoint, fetchedMovies)})
       }
     } catch (e) {
       this.setState({errorCode: e.message});
+    }
+  }
+
+  cleanData = (urlEndPoint, data) => {
+    if (urlEndPoint.includes('/')) {
+      
+    } else {
+      return data.movies.map(movie => {
+        return {id: movie.id, 
+                poster_path: movie.poster_path, 
+                title: movie.title}
+      })
     }
   }
 
