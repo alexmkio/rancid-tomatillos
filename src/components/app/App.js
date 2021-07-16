@@ -3,6 +3,7 @@ import Posters from '../posters/Posters';
 import MovieDetails from '../movie_details/MovieDetails';
 import ErrorCode from '../error_code/ErrorCode';
 import { getApiData } from '../../apiCalls';
+import { cleanData } from '../../utilities';
 import './App.css';
 import { Route } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
+      movies: null,
       errorCode: null,
       selectedMovie: null
     }
@@ -24,10 +25,10 @@ class App extends Component {
     try {
       if (endPoint.includes('/')) {
         let fetchedMovie = await getApiData(endPoint)
-        this.setState({selectedMovie: fetchedMovie.movie})
+        this.setState({selectedMovie: cleanData(endPoint, fetchedMovie)})
       } else {
         let fetchedMovies = await getApiData(endPoint)
-        this.setState({movies: fetchedMovies.movies})
+        this.setState({movies: cleanData(endPoint, fetchedMovies)})
       }
     } catch (e) {
       this.setState({errorCode: e.message});
@@ -51,7 +52,7 @@ class App extends Component {
         <Route exact path='/' render={() => {
           if (this.state.errorCode) {
             return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-          } else if (!this.state.movies.length) {
+          } else if (!this.state.movies) {
             return <Posters/>
           } else {
             return <Posters movies={this.state.movies}/>

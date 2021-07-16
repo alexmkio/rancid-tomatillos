@@ -17,16 +17,16 @@ class MovieDetails extends Component {
       let movie = this.props.movie;
       let genres = movie.genres.map(genre => <dd key={movie.genres.indexOf(genre)} className='genre'>{genre}</dd>);
       let tagline = !movie.tagline ? null : <dd className='tagline'>"{movie.tagline}"</dd>;
-      let budget = !movie.budget ? null : (
+      let budget = movie.budget === '0' ? null : (
         <>
           <dt>Budget</dt>
-          <dd>${movie.budget.toLocaleString('en-US')}</dd>
+          <dd>${movie.budget}</dd>
         </>
       );
-      let revenue = !movie.revenue ? null : (
+      let revenue = movie.revenue === '0' ? null : (
         <>
           <dt>Revenue</dt>
-          <dd>${movie.revenue.toLocaleString('en-US')}</dd>
+          <dd>${movie.revenue}</dd>
         </>
       );
       return (
@@ -44,7 +44,7 @@ class MovieDetails extends Component {
               <dt>Release Date</dt>
               <dd>{movie.release_date}</dd>
               <dt>Average User Rating</dt>
-              <dd>{Math.round(movie.average_rating * 100) / 100}</dd>
+              <dd>{movie.average_rating}</dd>
               {budget}
               {revenue}
             </dl>
