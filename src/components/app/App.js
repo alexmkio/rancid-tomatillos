@@ -10,7 +10,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
+      movies: null,
       errorCode: null,
       selectedMovie: null
     }
@@ -51,7 +51,7 @@ class App extends Component {
         <Route exact path='/' render={() => {
           if (this.state.errorCode) {
             return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-          } else if (!this.state.movies.length) {
+          } else if (!this.state.movies) {
             return <Posters/>
           } else {
             return <Posters movies={this.state.movies}/>
