@@ -43,40 +43,40 @@ class App extends Component {
   }
 
   render() {
-    return(
+    return (
       <>
-      <header>
-        <h1>Rancid Tomatillos</h1>
-      </header>
-      <main>
-        <Route exact path='/' render={() => {
-          if (this.state.errorCode) {
-            return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-          } else if (!this.state.movies) {
-            return <Posters/>
-          } else {
-            return <Posters movies={this.state.movies}/>
-          }
-        }}/>
-        <Route exact path='/:id' render={({match}) => {
-          if (this.state.errorCode) {
-            return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-          } else if (!this.state.selectedMovie) {
-            return <MovieDetails 
-              id={match.params.id} 
-              fetch={this.fetch} 
-            />
-          } else {
-            return <MovieDetails 
-              id={match.params.id} 
-              movie={this.state.selectedMovie} 
-              clearSelected={this.clearSelected}
-              fetch={this.fetch} 
-              state={this.state}
-            />
-          }
-        }}/>
-      </main>
+        <header>
+          <h1>Rancid Tomatillos</h1>
+        </header>
+        <main>
+          <Route exact path='/' render={() => {
+            if (this.state.errorCode) {
+              return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
+            } else if (!this.state.movies) {
+              return <Posters/>
+            } else {
+              return <Posters movies={this.state.movies}/>
+            }
+          }}/>
+          <Route exact path='/:id' render={({match}) => {
+            if (this.state.errorCode) {
+              return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
+            } else if (!this.state.selectedMovie) {
+              return <MovieDetails 
+                id={match.params.id} 
+                fetch={this.fetch} 
+              />
+            } else {
+              return <MovieDetails 
+                id={match.params.id} 
+                movie={this.state.selectedMovie} 
+                clearSelected={this.clearSelected}
+                fetch={this.fetch} 
+                state={this.state}
+              />
+            }
+          }}/>
+        </main>
       </>
     )
   }

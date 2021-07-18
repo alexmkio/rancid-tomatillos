@@ -16,6 +16,18 @@ class MovieDetails extends Component {
     } else {
       let movie = this.props.movie;
       let genres = movie.genres.map(genre => <dd key={movie.genres.indexOf(genre)} className='genre'>{genre}</dd>);
+      let genre = !movie.genres.length ? null : (
+        <>
+          <dt>Genre</dt>
+          {genres}
+        </>
+      );
+      let runtime = !movie.runtime ? null : (
+        <>
+          <dt>Runtime</dt>
+          <dd>{movie.runtime} minutes</dd>
+        </>
+      );
       let tagline = !movie.tagline ? null : <dd className='tagline'>"{movie.tagline}"</dd>;
       let budget = movie.budget === '0' ? null : (
         <>
@@ -37,10 +49,8 @@ class MovieDetails extends Component {
               <h2 className='detail-title'>{movie.title}</h2>
               {tagline}
               <dd>{movie.overview}</dd>
-              <dt>Genre</dt>
-              {genres}
-              <dt>Runtime</dt>
-              <dd>{movie.runtime} minutes</dd>
+              {genre}
+              {runtime}
               <dt>Release Date</dt>
               <dd>{movie.release_date}</dd>
               <dt>Average User Rating</dt>
