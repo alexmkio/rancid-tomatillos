@@ -20,7 +20,7 @@ class App extends Component {
   componentDidMount = async () => {
     this.fetch('movies')
   }
-  
+
   fetch = async (endPoint) => {
     try {
       if (endPoint.includes('/')) {
@@ -38,12 +38,12 @@ class App extends Component {
   clearSelected = () => {
     this.setState({
       errorCode: null,
-      selectedMovie: null 
+      selectedMovie: null
     });
   }
 
   render() {
-    return(
+    return (
       <>
       <header>
         <h1>Rancid Tomatillos</h1>
@@ -62,16 +62,16 @@ class App extends Component {
           if (this.state.errorCode) {
             return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
           } else if (!this.state.selectedMovie) {
-            return <MovieDetails 
-              id={match.params.id} 
-              fetch={this.fetch} 
+            return <MovieDetails
+              id={match.params.id}
+              fetch={this.fetch}
             />
           } else {
-            return <MovieDetails 
-              id={match.params.id} 
-              movie={this.state.selectedMovie} 
+            return <MovieDetails
+              id={match.params.id}
+              movie={this.state.selectedMovie}
               clearSelected={this.clearSelected}
-              fetch={this.fetch} 
+              fetch={this.fetch}
               state={this.state}
             />
           }
