@@ -9,6 +9,7 @@ class MovieDetails extends Component {
   }
 
   render() {
+    console.log(this.props.movie)
     if (!this.props.state) {
       return (
         <h3>Loading Movie Details</h3>        
@@ -16,6 +17,12 @@ class MovieDetails extends Component {
     } else {
       let movie = this.props.movie;
       let genres = movie.genres.map(genre => <dd key={movie.genres.indexOf(genre)} className='genre'>{genre}</dd>);
+      let genre = !movie.genres.length ? null : (
+        <>
+          <dt>Genre</dt>
+          <dd>{genres}</dd>
+        </>
+      );
       let tagline = !movie.tagline ? null : <dd className='tagline'>"{movie.tagline}"</dd>;
       let budget = movie.budget === '0' ? null : (
         <>
@@ -37,8 +44,7 @@ class MovieDetails extends Component {
               <h2 className='detail-title'>{movie.title}</h2>
               {tagline}
               <dd>{movie.overview}</dd>
-              <dt>Genre</dt>
-              {genres}
+              {genre}
               <dt>Runtime</dt>
               <dd>{movie.runtime} minutes</dd>
               <dt>Release Date</dt>
