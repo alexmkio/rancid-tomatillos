@@ -20,7 +20,7 @@ class MovieDetails extends Component {
       let genre = !movie.genres.length ? null : (
         <>
           <dt>Genre</dt>
-          <dd>{genres}</dd>
+          {genres}
         </>
       );
       let tagline = !movie.tagline ? null : <dd className='tagline'>"{movie.tagline}"</dd>;
