@@ -23,6 +23,12 @@ class MovieDetails extends Component {
           {genres}
         </>
       );
+      let runtime = !movie.runtime ? null : (
+        <>
+          <dt>Runtime</dt>
+          <dd>{movie.runtime} minutes</dd>
+        </>
+      );
       let tagline = !movie.tagline ? null : <dd className='tagline'>"{movie.tagline}"</dd>;
       let budget = movie.budget === '0' ? null : (
         <>
@@ -45,8 +51,7 @@ class MovieDetails extends Component {
               {tagline}
               <dd>{movie.overview}</dd>
               {genre}
-              <dt>Runtime</dt>
-              <dd>{movie.runtime} minutes</dd>
+              {runtime}
               <dt>Release Date</dt>
               <dd>{movie.release_date}</dd>
               <dt>Average User Rating</dt>
