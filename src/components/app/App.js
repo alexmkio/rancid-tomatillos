@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   render() {
-    return(
+    return (
       <>
       <header>
         <h1>Rancid Tomatillos</h1>
