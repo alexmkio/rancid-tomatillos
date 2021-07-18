@@ -5,13 +5,13 @@ import './MovieDetails.css';
 
 class MovieDetails extends Component {
   componentDidMount() {
-    this.props.fetch(`movies/${this.props.id}`)
+    this.props.fetch(`movies/${this.props.id}`, 'selectedMovie')
   }
 
   render() {
     if (!this.props.state) {
       return (
-        <h3>Loading Movie Details</h3>        
+        <h3>Loading Movie Details</h3>
       )
     } else {
       let movie = this.props.movie;
