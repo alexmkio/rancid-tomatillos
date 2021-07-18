@@ -31,7 +31,7 @@ This application was built by [Lauren Kessell](https://github.com/LKessell) and 
 
 ## Technologies Used
 
-This application was built using the [React](https://reactjs.org/) javascript framework. [Cypress](https://www.cypress.io/) and [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) were used to test user stories and our data model. GitHub and Git are used for version control and collaboration. HTTP Request is being used to Get inside of an async await function.
+This application was built using the [React](https://reactjs.org/) javascript framework. [Router](https://reactrouter.com/) was used for multi-page functionality. [Cypress](https://www.cypress.io/) and [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) were used to test user stories and our data model. GitHub and Git are used for version control and collaboration. HTTP Request is being used to Get inside of an async await function.
 
 ## The Evolution of the Project
 
