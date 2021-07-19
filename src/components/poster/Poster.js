@@ -5,14 +5,12 @@ import './Poster.css';
 const Poster = ({photo, id, title}) => {
   if (photo) {
     return (
-      <article>
         <img
           className='poster-image'
           id={id}
           src={photo}
           alt={title}
         />
-      </article>
     )
   }
   return (
