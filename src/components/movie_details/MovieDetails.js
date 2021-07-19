@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './MovieDetails.css';
 
 class MovieDetails extends Component {
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.fetch(`movies/${this.props.id}`, 'selectedMovie')
   }
 
-  render() {
+  render = () => {
     if (!this.props.state) {
       return (
         <h3>Loading Movie Details</h3>

@@ -17,14 +17,13 @@ class App extends Component {
     }
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     this.fetch('movies', 'movies')
   }
 
   fetch = async (endPoint, property) => {
     try {
       const fetchedData = await getApiData(endPoint);
-
       this.setState({[property]: cleanData(endPoint, fetchedData)});
     } catch (e) {
       this.setState({errorCode: e.message});
@@ -38,7 +37,7 @@ class App extends Component {
     });
   }
 
-  render() {
+  render = () => {
     return (
       <>
         <header>
