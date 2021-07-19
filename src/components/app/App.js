@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       movies: [],
       errorCode: null,
-      selectedMovie: null
+      selectedMovie: {}
     }
   }
 
@@ -33,7 +33,7 @@ class App extends Component {
   clearSelected = () => {
     this.setState({
       errorCode: null,
-      selectedMovie: null
+      selectedMovie: {}
     });
   }
 
@@ -67,7 +67,6 @@ class App extends Component {
                 movie={this.state.selectedMovie}
                 clearSelected={this.clearSelected}
                 fetch={this.fetch}
-                state={this.state}
               />
             }
           }}/>
