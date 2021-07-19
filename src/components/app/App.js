@@ -11,9 +11,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: null,
+      movies: [],
       errorCode: null,
-      selectedMovie: null
+      selectedMovie: {}
     }
   }
 
@@ -33,7 +33,7 @@ class App extends Component {
   clearSelected = () => {
     this.setState({
       errorCode: null,
-      selectedMovie: null
+      selectedMovie: {}
     });
   }
 
@@ -47,7 +47,7 @@ class App extends Component {
           <Route exact path='/' render={() => {
             if (this.state.errorCode) {
               return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-            } else if (!this.state.movies) {
+            } else if (!this.state.movies.length) {
               return <Posters/>
             } else {
               return <Posters movies={this.state.movies}/>
@@ -67,7 +67,6 @@ class App extends Component {
                 movie={this.state.selectedMovie}
                 clearSelected={this.clearSelected}
                 fetch={this.fetch}
-                state={this.state}
               />
             }
           }}/>
