@@ -17,7 +17,7 @@ class App extends Component {
     }
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     this.fetch('movies', 'movies')
   }
 
