@@ -9,7 +9,7 @@ class MovieDetails extends Component {
   }
 
   render = () => {
-    if (!this.props.state) {
+    if (!this.props.movie.title) {
       return (
         <h3>Loading Movie Details</h3>
       )
@@ -74,6 +74,5 @@ MovieDetails.propTypes = {
   id: PropTypes.string.isRequired,
   fetch: PropTypes.func.isRequired,
   movie: PropTypes.object,
-  clearSelected: PropTypes.func,
-  state: PropTypes.object
+  clearSelected: PropTypes.func
 };
