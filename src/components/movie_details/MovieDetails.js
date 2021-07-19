@@ -8,7 +8,7 @@ class MovieDetails extends Component {
     this.props.fetch(`movies/${this.props.id}`, 'selectedMovie')
   }
 
-  render() {
+  render = () => {
     if (!this.props.state) {
       return (
         <h3>Loading Movie Details</h3>
