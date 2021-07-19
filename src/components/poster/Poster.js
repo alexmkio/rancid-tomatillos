@@ -1,18 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import './Poster.css';
 
 const Poster = ({photo, id, title}) => {
   if (photo) {
     return (
-      <article>
-        <img
-          className='poster-image'
-          id={id}
-          src={photo}
-          alt={title}
-        />
-      </article>
+      <img
+        className='poster-image'
+        id={id}
+        src={photo}
+        alt={title}
+      />
     )
   }
   return (

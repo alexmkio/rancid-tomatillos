@@ -11,25 +11,20 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: null,
+      movies: [],
       errorCode: null,
-      selectedMovie: null
+      selectedMovie: {}
     }
   }
 
-  componentDidMount = async () => {
-    this.fetch('movies')
+  componentDidMount = () => {
+    this.fetch('movies', 'movies')
   }
 
-  fetch = async (endPoint) => {
+  fetch = async (endPoint, property) => {
     try {
-      if (endPoint.includes('/')) {
-        let fetchedMovie = await getApiData(endPoint)
-        this.setState({selectedMovie: cleanData(endPoint, fetchedMovie)})
-      } else {
-        let fetchedMovies = await getApiData(endPoint)
-        this.setState({movies: cleanData(endPoint, fetchedMovies)})
-      }
+      const fetchedData = await getApiData(endPoint);
+      this.setState({[property]: cleanData(endPoint, fetchedData)});
     } catch (e) {
       this.setState({errorCode: e.message});
     }
@@ -38,45 +33,44 @@ class App extends Component {
   clearSelected = () => {
     this.setState({
       errorCode: null,
-      selectedMovie: null
+      selectedMovie: {}
     });
   }
 
-  render() {
+  render = () => {
     return (
       <>
-      <header>
-        <h1>Rancid Tomatillos</h1>
-      </header>
-      <main>
-        <Route exact path='/' render={() => {
-          if (this.state.errorCode) {
-            return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-          } else if (!this.state.movies) {
-            return <Posters/>
-          } else {
-            return <Posters movies={this.state.movies}/>
-          }
-        }}/>
-        <Route exact path='/:id' render={({match}) => {
-          if (this.state.errorCode) {
-            return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
-          } else if (!this.state.selectedMovie) {
-            return <MovieDetails
-              id={match.params.id}
-              fetch={this.fetch}
-            />
-          } else {
-            return <MovieDetails
-              id={match.params.id}
-              movie={this.state.selectedMovie}
-              clearSelected={this.clearSelected}
-              fetch={this.fetch}
-              state={this.state}
-            />
-          }
-        }}/>
-      </main>
+        <header>
+          <h1>Rancid Tomatillos</h1>
+        </header>
+        <main>
+          <Route exact path='/' render={() => {
+            if (this.state.errorCode) {
+              return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
+            } else if (!this.state.movies.length) {
+              return <Posters/>
+            } else {
+              return <Posters movies={this.state.movies}/>
+            }
+          }}/>
+          <Route exact path='/:id' render={({match}) => {
+            if (this.state.errorCode) {
+              return <ErrorCode code={this.state.errorCode} clearSelected={this.clearSelected}/>
+            } else if (!this.state.selectedMovie) {
+              return <MovieDetails
+                id={match.params.id}
+                fetch={this.fetch}
+              />
+            } else {
+              return <MovieDetails
+                id={match.params.id}
+                movie={this.state.selectedMovie}
+                clearSelected={this.clearSelected}
+                fetch={this.fetch}
+              />
+            }
+          }}/>
+        </main>
       </>
     )
   }
