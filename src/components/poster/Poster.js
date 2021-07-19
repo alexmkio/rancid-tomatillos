@@ -4,12 +4,12 @@ import './Poster.css';
 const Poster = ({photo, id, title}) => {
   if (photo) {
     return (
-        <img
-          className='poster-image'
-          id={id}
-          src={photo}
-          alt={title}
-        />
+      <img
+        className='poster-image'
+        id={id}
+        src={photo}
+        alt={title}
+      />
     )
   }
   return (
