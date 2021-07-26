@@ -23,10 +23,18 @@ class App extends Component {
 
   fetch = async (endPoint, property) => {
     try {
-      const fetchedData = await getApiData(endPoint);
-      this.setState({[property]: cleanData(endPoint, fetchedData)});
+      const response = await getApiData(endPoint);
+      this.checkForError(response)
+      let data = await response.json();
+      this.setState({[property]: cleanData(endPoint, data), errorCode: null});
     } catch (e) {
       this.setState({errorCode: e.message});
+    }
+  }
+
+  checkForError = (response) => {
+    if (!response.ok) {
+      throw new Error(response.status);
     }
   }
 
